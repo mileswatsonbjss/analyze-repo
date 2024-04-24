@@ -8,6 +8,12 @@ jobs:
   update-readme:
     runs-on: ubuntu-latest
     steps:
+      - name: set git config
+        run: |
+          git config --global user.email "miles.watson@bjss.com"
+          git config --global user.name "Miles Watson"
+          git config -l
+
       - name: Checkout code
         uses: actions/checkout@v2
 
