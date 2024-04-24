@@ -1,4 +1,24 @@
-# Analyze repo
+# GitHub Repo Activity Tracker
+
+
+This project uses the GitHub API to track activity metrics across multiple repositories within a single organisation.
+
+## Features
+
+
+ - **Track Contributors**  Identify the most active contributors across repos
+    **Commit Count:** Enumerate the total number of commits for each repository.
+    **Pull Request Status:** Analyse the volume and status (open/closed) of pull requests within each repository.
+
+## Installation
+
+
+...
+
+## Output
+
+
+A list of repositories within the organisation:
 
 | Repository |
 | ---------- |
@@ -31,3 +51,6 @@
 | facebook-php-business-sdk |
 | facebook-python-business-sdk |
 | facebook-ruby-business-sdk |
+
+
+Last modified: 2024-04-24 15:34:23
