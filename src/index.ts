@@ -26,8 +26,8 @@ async function getContributorsByRepository(owner: string, repo: string) {
         const contributors = response.data.map((contributor: { login: string, contributions: number }) => ({
           login: contributor.login, 
           contributions: contributor.contributions
-        })).sort((a: { contributions: number }, b: { contributions: number }) => b.contributions - a.contributions);
-        return [repo, ...contributors];
+        })).sort((a: { contributions: number }, b: { contributions: number }) => b.contributions - a.contributions).slice(0, 5);
+        return [repo, contributors];
     } catch (error: any) {
         console.error('Error fetching contributors:', error.response.data);
         throw error;
@@ -54,11 +54,22 @@ async function getAllRepositories(owner: string) {
             return await getContributorsByRepository(owner, repo);
         }));
 
-        console.log('contributors', contributors)
-
         const table = repositories.filter((name: string) => name !== '.github').map((name: string) => {
           return [name]
         });
+
+        
+        const contributorTable = contributors.map(([repoName, repoContributors]: [string, { login: string, contributions: number }[]]) => {
+          return [
+            { h2: repoName },
+            { table: {
+                headers: ['Contributor', 'Count'],
+                rows: repoContributors.map(({ login, contributions }: { login: string, contributions: number }) => [login, contributions])
+            } }
+          ]
+        });
+
+        console.log('contributorTable', contributorTable)
 
         const currentDateTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
 
