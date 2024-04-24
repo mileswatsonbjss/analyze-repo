@@ -28,7 +28,7 @@ jobs:
       - name: Build project
         run: npm run build
         env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update README.md
         run: node ./public/index.js
