@@ -19,6 +19,21 @@ async function authenticate() {
     return headers;
 }
 
+async function getContributorsByRepository(owner: string, repo: string) {
+    try {
+        const headers = await authenticate();
+        const response = await axios.get(`https://api.github.com/repos/${owner}/${repo}/contributors`, { headers });
+        const contributors = response.data.map((contributor: { login: string, contributions: number }) => ({
+          login: contributor.login, 
+          contributions: contributor.contributions
+        })).sort((a: { contributions: number }, b: { contributions: number }) => b.contributions - a.contributions);
+        return [repo, ...contributors];
+    } catch (error: any) {
+        console.error('Error fetching contributors:', error.response.data);
+        throw error;
+    }
+}
+
 // Function to get all repositories of an owner
 async function getAllRepositories(owner: string) {
     try {
@@ -35,6 +50,11 @@ async function getAllRepositories(owner: string) {
 (async () => {
     try {
         const repositories = await getAllRepositories(owner);
+        const contributors = await Promise.all(repositories.map(async (repo: string) => {
+            return await getContributorsByRepository(owner, repo);
+        }));
+
+        console.log('contributors', contributors)
 
         const table = repositories.filter((name: string) => name !== '.github').map((name: string) => {
           return [name]
