@@ -53,11 +53,6 @@ async function getAllRepositories(owner: string) {
         const contributors = await Promise.all(repositories.map(async (repo: string) => {
             return await getContributorsByRepository(owner, repo);
         }));
-
-        const table = repositories.filter((name: string) => name !== '.github').map((name: string) => {
-          return [name]
-        });
-
         
         const contributorTable = contributors.map(([repoName, repoContributors]: [string, { login: string, contributions: number }[]]) => {
           return [
