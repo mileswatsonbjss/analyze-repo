@@ -4,6 +4,7 @@ import { execSync } from 'child_process'
 import axios from 'axios'
 import json2md from 'json2md'
 import fs from 'fs'
+import dayjs from 'dayjs'
 
 // Define owner
 const owner = 'facebook';
@@ -39,12 +40,30 @@ async function getAllRepositories(owner: string) {
           return [name]
         });
 
+        const currentDateTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
+
         const readmeContent = json2md([
-            { h1: 'Analyze repo' },
+            { h1: 'GitHub Repo Activity Tracker' },
+            { p: 'This project uses the GitHub API to track activity metrics across multiple repositories within a single organisation.' },
+            { h2: 'Features' },
+            { 
+              ul: [
+                [
+                  '**Track Contributors**  Identify the most active contributors across repos', 
+                  '**Commit Count:** Enumerate the total number of commits for each repository.',
+                  '**Pull Request Status:** Analyse the volume and status (open/closed) of pull requests within each repository.'
+                ],
+              ] 
+            },
+            { h2: 'Installation' },
+            { p: '...' },
+            { h2: 'Output' },
+            { p: 'A list of repositories within the organisation:' },
             { table: {
                 headers: ['Repository'],
                 rows: table
-            }}
+            }},
+            { p: `Last modified: ${currentDateTime}` }
         ]);
 
         fs.writeFileSync('README.md', readmeContent);
