@@ -1,0 +1,27 @@
+{
+  "name": "analyze-repo",
+  "version": "1.0.0",
+  "description": "Analyze repos",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@octokit/oauth-app": "^7.1.1",
+    "@octokit/rest": "^20.1.0",
+    "@tsconfig/node18": "^18.2.4",
+    "@types/json2md": "^1.5.4",
+    "@types/node": "^20.12.7",
+    "axios": "^1.6.8",
+    "octokit": "^3.2.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@octokit/auth-oauth-user": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "json2md": "^2.0.1"
+  }
+}

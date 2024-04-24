@@ -1,2 +1,1 @@
-# analyze-repo
-Analyze repos
+# Analyze repo
