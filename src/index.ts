@@ -69,8 +69,6 @@ async function getAllRepositories(owner: string) {
           ]
         });
 
-        console.log('contributorTable', contributorTable)
-
         const currentDateTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
 
         const readmeContent = json2md([
@@ -90,10 +88,7 @@ async function getAllRepositories(owner: string) {
             { p: '...' },
             { h2: 'Output' },
             { p: 'A list of repositories within the organisation:' },
-            { table: {
-                headers: ['Repository'],
-                rows: table
-            }},
+            ...contributorTable,
             { p: `Last modified: ${currentDateTime}` }
         ]);
 
