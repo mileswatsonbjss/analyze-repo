@@ -1,5 +1,6 @@
 name: Update README with Top Contributors
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *' # Run every day at midnight
 
