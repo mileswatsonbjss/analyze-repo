@@ -61,7 +61,7 @@ async function getAllRepositories(owner: string) {
         execSync('git commit -m "Update README.md"');
     
         // Push changes
-        execSync('git push origin master');
+        execSync('git push origin main');
     
         console.log('Changes added, committed, and pushed successfully.');
     } catch (error) {
